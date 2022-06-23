@@ -47,8 +47,8 @@ public class NavActivity extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case R.id.action:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container,new DateTimePickerFrag(),"Date time picker").commitAllowingStateLoss();
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.container,new DateTimePickerFrag(),"Date Time Frag").commitAllowingStateLoss();
+                         break;
                 }
 
                 return true;

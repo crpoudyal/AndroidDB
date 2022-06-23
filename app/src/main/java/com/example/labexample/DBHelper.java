@@ -45,6 +45,18 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+
+    public boolean updateData(int id,String name,String address){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name",name);
+        contentValues.put("address",address);
+
+        db.update("tbl",contentValues,"id=?",new String[]{String.valueOf(id)});
+        db.close();
+        return true;
+    }
+
     public Cursor selectData() {
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT * FROM tbl";

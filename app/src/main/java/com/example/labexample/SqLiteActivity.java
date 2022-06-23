@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SqLiteActivity extends AppCompatActivity {
     EditText edtId, edtName, edtAddress;
     TextView txt;
-    Button insert, show;
+    Button insert, show,update;
     DBHelper dbHelper;
 
     @Override
@@ -30,6 +30,7 @@ public class SqLiteActivity extends AppCompatActivity {
         edtAddress = findViewById(R.id.address);
         insert = findViewById(R.id.insert);
         show = findViewById(R.id.show);
+        update = findViewById(R.id.update);
         txt = findViewById(R.id.txt);
 
 
@@ -42,6 +43,19 @@ public class SqLiteActivity extends AppCompatActivity {
                 dbHelper.insertData(id, name, address);
 
                 Toast.makeText(getApplicationContext(), "Data Inserted", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = Integer.parseInt(edtId.getText().toString());
+                String name = edtName.getText().toString();
+                String address = edtAddress.getText().toString();
+
+                dbHelper.updateData(id,name,address);
+
+                Toast.makeText(getApplicationContext(), "Data Updated", Toast.LENGTH_SHORT).show();
 
             }
         });
