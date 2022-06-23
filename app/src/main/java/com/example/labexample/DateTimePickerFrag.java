@@ -28,6 +28,7 @@ public class DateTimePickerFrag extends Fragment {
         View view = inflater.inflate(R.layout.date_time_picker_layout, container, false);
 
         mContext = getContext();
+
         btnDatePicker = view.findViewById(R.id.btn_date_picker);
         btnTimePicker = view.findViewById(R.id.btn_time_picker);
 

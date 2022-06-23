@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SqLiteActivity extends AppCompatActivity {
     EditText edtId, edtName, edtAddress;
     TextView txt;
-    Button insert, show,update;
+    Button insert, show,update,delete;
     DBHelper dbHelper;
 
     @Override
@@ -31,6 +31,7 @@ public class SqLiteActivity extends AppCompatActivity {
         insert = findViewById(R.id.insert);
         show = findViewById(R.id.show);
         update = findViewById(R.id.update);
+        delete = findViewById(R.id.delete);
         txt = findViewById(R.id.txt);
 
 
@@ -42,7 +43,7 @@ public class SqLiteActivity extends AppCompatActivity {
                 String address = edtAddress.getText().toString();
                 dbHelper.insertData(id, name, address);
 
-                Toast.makeText(getApplicationContext(), "Data Inserted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SqLiteActivity.this, "Data Inserted", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -55,7 +56,7 @@ public class SqLiteActivity extends AppCompatActivity {
 
                 dbHelper.updateData(id,name,address);
 
-                Toast.makeText(getApplicationContext(), "Data Updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SqLiteActivity.this, "Data Updated", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -75,5 +76,14 @@ public class SqLiteActivity extends AppCompatActivity {
                         + "\n Name = " + name + "\n address = " + address);
             }
         });
+       delete.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               int id = Integer.parseInt(edtId.getText().toString());
+               dbHelper.deleteData(id);
+               Toast.makeText(SqLiteActivity.this, "Data Deleted", Toast.LENGTH_SHORT).show();
+
+           }
+       });
     }
 }
