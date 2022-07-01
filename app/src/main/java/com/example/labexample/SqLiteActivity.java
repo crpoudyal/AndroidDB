@@ -6,15 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class SqLiteActivity extends AppCompatActivity {
     EditText edtId, edtName, edtAddress;
-    TextView txt;
+    ListView txt;
     Button insert, show,update,delete;
     DBHelper dbHelper;
 
@@ -64,16 +67,19 @@ public class SqLiteActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                int id = 0;
-                String name = "", address = "";
+                ArrayList<Integer> id = new ArrayList<>();
+                ArrayList<String> name = new ArrayList<>();
+                ArrayList<String> address = new ArrayList<>();
+
                 Cursor cursor = dbHelper.selectData();
-                while (cursor.moveToNext()) {
-                    id = cursor.getInt(0);
-                    name = cursor.getString(1);
-                    address = cursor.getString(2);
+                while (cursor.moveToNext()){
+                    id.add(cursor.getInt(0));
+                    name.add(cursor.getString(1));
+                    address.add(cursor.getString(2));
                 }
-                txt.setText("ID = " + id
-                        + "\n Name = " + name + "\n address = " + address);
+                ListAdapter adapter = new ListAdapter(SqLiteActivity.this,id,name,address);
+                txt.setAdapter(adapter);
+
             }
         });
        delete.setOnClickListener(new View.OnClickListener() {
